@@ -16,3 +16,4 @@ V1.1 (11-05-24) - Editing of Documentation on Github Readme File
 # ECE2112 - Exploratory Data Analysis
 Python - Exploratory Data Analysis on Spotify 2023 Dataset
 
+Import necessary libraries needed for analyzing the dataset such as pandas and seaborn or matplot
