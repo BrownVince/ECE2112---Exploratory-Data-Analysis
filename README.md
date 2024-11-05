@@ -8,7 +8,7 @@ Submitted:
 
 # Version History
 V1.0 (11-04-24) - Initial Editing of Github Repository  
-V1.1 (11-05-24) - Editing of Documentation on Github Readme File Part 1
+V1.1 (11-05-24) - Editing of Documentation on Github Readme File Part 1  
 V1.2 (11-06-24) - Editing of Documentation on Github Readme File Part 2
 
 # Software(s) Used
