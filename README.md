@@ -32,5 +32,47 @@ For this project, I used **seaborn** as my primary data visualization tool
 ```
 dfdesc = df.describe(include='all')
 ```
+But I noticed that some columns that are supposed to be an integer type column, are in string (object) data type columns because some of their data are appearing as NaN such as the mean and std  
+**Insert Picture**  
 
+So I tried to convert the said columns into an integer type column, but an error appeared that it can't convert to an integer data type  
+**Insert Picture**  
 
+So I looked what went wrong, then noticed that in the site where I downloaded the file, the data type of the column 'streams' are in string  
+**Insert Picture**  
+
+So I opened the discussion tab of the said dateset in the kaggle website, then I saw someone said that in the streams column, there is one corrupted value, where the value is a text instead of a number  
+**Insert 2 Picture**  
+
+I then used the function pd.to_numeric in order to remove the corrupted value and turn the 'streams' column into a numerical data type  
+```
+df['streams'] = pd.to_numeric(df['streams'], errors='coerce')
+```
+**Insert Picture**  
+
+But when I tried to convert the other columns that are in string (object) data type, another error occured in columns 'in_deezer_playlists' and 'in_shazam_charts' since it's numerical values have commas  
+**Insert Picture**  
+
+So I used the .replace() function to remove the commas then converted the columns into a numerical data type
+```
+#Removing first the commas in in_deezer_playlists column then converting it to a numerical column
+df['in_deezer_playlists'] = df['in_deezer_playlists'].str.replace(',', '')
+df['in_deezer_playlists'] = pd.to_numeric(df['in_deezer_playlists'], errors='coerce')
+
+#Removing first the commas in in_shazam_charts column then converting it to a numerical column
+df['in_shazam_charts'] = df['in_shazam_charts'].str.replace(',', '')
+df['in_shazam_charts'] = pd.to_numeric(df['in_shazam_charts'], errors='coerce')
+```
+*Note that when using the pd.to_numeric() function and set the parameters of error to 'coerce', python will convert the columns into numerical data and remove string entries, replacing it with missing values (NaN), making the entire column into a float data type, since float can handle NaN values. But if the column is complete with no missing values, it will convert it into an integer data type.*
+
+# Overview of Dataset
+* In the given dataset, there are 953 rows and 24 columns
+**Insert Picture**
+
+* The data types of each column are as follows. Note that object data type are string (object) data types. Also, the 'streams' and 'in_shazam_charts' are in float since both contain missing values
+**Insert Picture**
+
+* There are 1 missing value in 'streams', 50 missing values in 'in_shazam_charts', and 95 missing values in 'key'. *Note that the 1 missing value in streams is the removed corrupted value*
+**Insert Picture**
+
+# Basic Descriptive Statistics
