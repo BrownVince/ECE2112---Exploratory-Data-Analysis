@@ -9,7 +9,10 @@ Submitted:
 # Version History
 V1.0 (11-04-24) - Initial Editing of Github Repository  
 V1.1 (11-05-24) - Editing of Documentation on Github Readme File Part 1  
-V1.2 (11-06-24) - Editing of Documentation on Github Readme File Part 2
+V1.2 (11-06-24) - Editing of Documentation on Github Readme File Part 2  
+V1.3 (11-07-24) - Editing of Documentation on Github Readme File Part 3  
+V2.0 (11-08-24) - Proofreading and Revision Part 1  **May Change**
+V2.1 (11-09-24) - Proofreading and Revision Part 2  
 
 # Software(s) Used
 <img src="https://github.com/user-attachments/assets/32ea11b3-b4e5-4efa-a673-ce2b102ab4b5" alt="Jupyter Logo" width="80"/> <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" width="100"/>
@@ -66,13 +69,41 @@ df['in_shazam_charts'] = pd.to_numeric(df['in_shazam_charts'], errors='coerce')
 *Note that when using the pd.to_numeric() function and set the parameters of error to 'coerce', python will convert the columns into numerical data and remove string entries, replacing it with missing values (NaN), making the entire column into a float data type, since float can handle NaN values. But if the column is complete with no missing values, it will convert it into an integer data type.*
 
 # Overview of Dataset
+
 * In the given dataset, there are 953 rows and 24 columns
 **Insert Picture**
 
 * The data types of each column are as follows. Note that object data type are string (object) data types. Also, the 'streams' and 'in_shazam_charts' are in float since both contain missing values
 **Insert Picture**
 
-* There are 1 missing value in 'streams', 50 missing values in 'in_shazam_charts', and 95 missing values in 'key'. *Note that the 1 missing value in streams is the removed corrupted value*
+* There is 1 missing value in 'streams', 50 missing values in 'in_shazam_charts', and 95 missing values in 'key'. *Note that the 1 missing value in streams is the removed corrupted value*
 **Insert Picture**
 
 # Basic Descriptive Statistics
+
+* Mean, Median, and Standard Deviation of the streams column  
+**Insert Picture**
+
+* Relationship between released_year and artist_count  
+I noticed the trend where in the number of artists increases as the year progresses, in other words, more and more people are becoming an artist as the year goes by that by 2023, a lot of single artists have emereged. Also, the artist count increases as the year passes, hence many artists tries to make music in groups.  
+As for the outliers, I noticed that in the early 1930s, artists are formed in groups rather than being single.
+**Insert Picture**
+
+# Top Performers
+
+* The top 5 most streamed tracks are as follows
+**Insert Picture**
+
+* Top 5 most frequent artists based on the number of tracks
+**Insert Picture**
+
+# Temporal Trends
+
+* Number of tracks released per year
+Based on the given bar graph, we can see that the tracks released increases as year progresses
+**Insert Picture**
+
+* Number of tracks released per month
+Based on the graph outcome, the number of tracks released per month does not follow any noticeable trends, meaning that artists release their music at any time of the year. Also, the month of January has the highest number of tracks released **Paraphrase**
+
+# Genre and Music Characteristics
