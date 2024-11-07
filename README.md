@@ -11,8 +11,8 @@ V1.0 (11-04-24) - Initial Editing of Github Repository
 V1.1 (11-05-24) - Editing of Documentation on Github Readme File Part 1  
 V1.2 (11-06-24) - Editing of Documentation on Github Readme File Part 2  
 V1.3 (11-07-24) - Editing of Documentation on Github Readme File Part 3  
-V2.0 (11-08-24) - Proofreading and Revision Part 1  **May Change**
-V2.1 (11-09-24) - Proofreading and Revision Part 2  
+V2.0 (11-08-24) - Editing of Documentation on Github Readme File Part 4  
+V2.1 (11-09-24) - Proofreading and Revision Part 1     
 
 # Software(s) Used
 <img src="https://github.com/user-attachments/assets/32ea11b3-b4e5-4efa-a673-ce2b102ab4b5" alt="Jupyter Logo" width="80"/> <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" width="100"/>
