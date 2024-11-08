@@ -126,12 +126,13 @@ top5tracks = toptracks.head(5)[['track_name', 'streams']]
 
 plt.figure(figsize=(17,7))
 sns.barplot(x='track_name', y='streams', data=top5tracks)
-plt.xlabel('Total Streams')
-plt.ylabel('Track Name')
+plt.xlabel('Track Name')
+plt.ylabel('Total Streams')
 ```
 With the number one spot, we have Blinding Lights! as the most streamed track making it the most popular one, followed by Shape of You, Someone You Loved, Dance Monkey, and Sunflower - Spider-Man: Into the Spider-Verse.  
-*Additionaly, if you want to display the artists that owns these tracks, you can add the column name in this code toptracks.head(5)[['COLUMN NAME']]*
-**Insert Picture**
+*Additionaly, if you want to display the artists that owns these tracks, you can add the column name in this code toptracks.head(5)[['COLUMN NAME']]*  
+
+![Screenshot 2024-11-09 052748](https://github.com/user-attachments/assets/8371f213-a560-4fa9-adfa-c14ddbb1443c)  
 
 * **Top 5 most frequent artists based on the number of tracks**    
 In this problem, I was having a hard time at first since I noticed that some cells have multiple artists.  
@@ -144,11 +145,11 @@ dffreqartist = pd.DataFrame(freqartist)
 
 plt.figure(figsize=(17,7))
 sns.barplot(x='artist(s)_name', y='count', data=dffreqartist)
-plt.xlabel('Count')
-plt.ylabel('Artist Name')
+plt.xlabel('Artist Name')
+plt.ylabel('Count')
 ```
 Congrats to Bad Bunny for having the highest number of tracks garnering a total number of 40 tracks! followed by, Taylor Swift, The Weeknd, SZA, and Kendrick Lamar.  
-**Insert Picture**
+![Screenshot 2024-11-09 052938](https://github.com/user-attachments/assets/2f6c0a73-8c30-46c4-94b4-8e391ec98e46)  
 
 # Temporal Trends
 
