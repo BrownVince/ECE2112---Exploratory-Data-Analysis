@@ -29,32 +29,33 @@ df = pd.read_csv('spotify2023.csv')
 ```
 When I first tried to load the dataset an error appeared, so I tried to change the file type of the dataset then it worked just fine  
 
-For this project, in majority I used **seaborn** as my primary data visualization tool in analyzing trends and correlations between different variables
-
 * When creating the summary statistics, set the parameters for the describe function to include='all' in order to provide also summary statistics for the string (object) data type columns
 ```
 dfdesc = df.describe(include='all')
 ```
-But I noticed that some columns that are supposed to be an integer type column, are in string (object) data type columns because some of their data are appearing as NaN such as the mean and std   
+- But I noticed that some columns that are supposed to be an integer type column, are in string (object) data type columns because some of their data are appearing as NaN such as the mean and std   
 
-So I tried to convert the said columns into an integer type column, but an error appeared that it can't convert to an integer data type  
-**Insert Picture**  
+- So I tried to convert the said columns into an integer type column, but an error appeared that it can't convert to an integer data type  
+<img src="https://github.com/user-attachments/assets/0cb31de6-6dbb-4976-864f-ad76c48aadc1" alt="interror" width="500"/>  
 
-So I looked what went wrong, then noticed that in the site where I downloaded the file, the data type of the column 'streams' are in string  
 
-So I opened the discussion tab of the said dateset in the kaggle website, then I saw someone said that in the streams column, there is one corrupted value, where the value is a text instead of a number  
-**Insert 2 Picture**  
+- So I looked what went wrong, then noticed that in the site where I downloaded the file, the data type of the column 'streams' are in string. So I opened the discussion tab of the said dateset in the kaggle website, then I saw someone said that in the streams column, there is one corrupted value, where the value is a text instead of a number  
+<img src="https://github.com/user-attachments/assets/9d169bb0-50c5-4b5a-a6bf-01467a25ad87" alt="corruptvalue" width="600"/>  
 
-I then used the function pd.to_numeric in order to remove the corrupted value and turn the 'streams' column into a numerical data type  
+
+So I searched it in the dataset, and here it is :(  
+<img src="https://github.com/user-attachments/assets/081014a1-2cbb-4fe8-ba2d-e25166ae28f5" alt="corruptvalue2" width="600"/>
+
+
+- I then used the function pd.to_numeric in order to remove the corrupted value and turn the 'streams' column into a numerical data type  
 ```
 df['streams'] = pd.to_numeric(df['streams'], errors='coerce')
 ```
-**Insert Picture**  
 
-But when I tried to convert the other columns that are in string (object) data type, another error occured in columns 'in_deezer_playlists' and 'in_shazam_charts' since it's numerical values have commas  
-**Insert Picture**  
+- But when I tried to convert the other columns that are in string (object) data type, another error occured in columns 'in_deezer_playlists' and 'in_shazam_charts' since it's numerical values have commas  
+<img src="https://github.com/user-attachments/assets/777a5d01-aebb-4cee-9a4a-ceefd73135cc" alt="commaerror" width="600"/>    
 
-So I used the .replace() function to remove the commas then converted the columns into a numerical data type
+- So I used the .replace() function to remove the commas then converted the columns into a numerical data type
 ```
 #Removing first the commas in in_deezer_playlists column then converting it to a numerical column
 df['in_deezer_playlists'] = df['in_deezer_playlists'].str.replace(',', '')
@@ -71,7 +72,11 @@ For this project, in majority I used **seaborn** as my primary data visualizatio
 # Overview of Dataset
 
 * In the given dataset, there are 953 rows and 24 columns
-**Insert Picture**
+```
+#Number of rows and columns of the Dataset. Note that the output of the .shape function is (Rows, Columns)
+rows, columns = df.shape
+print('Rows: ', rows, '\nColumns: ', columns)
+```
 
 * The data types of each column are as follows. Note that object data type are string (object) data types. Also, the 'streams' and 'in_shazam_charts' are in float since both contain missing values
 **Insert Picture**
