@@ -37,15 +37,13 @@ dfdesc = df.describe(include='all')
 - But I noticed that some columns that are supposed to be an integer type column, are in string (object) data type columns because some of their data are appearing as NaN such as the mean and std   
 
 - So I tried to convert the said columns into an integer type column, but an error appeared that it can't convert to an integer data type  
-<img src="https://github.com/user-attachments/assets/0cb31de6-6dbb-4976-864f-ad76c48aadc1" alt="interror" width="500"/>  
-
 
 - So I looked what went wrong, then noticed that in the site where I downloaded the file, the data type of the column 'streams' are in string. So I opened the discussion tab of the said dateset in the kaggle website, then I saw someone said that in the streams column, there is one corrupted value, where the value is a text instead of a number  
-<img src="https://github.com/user-attachments/assets/9d169bb0-50c5-4b5a-a6bf-01467a25ad87" alt="corruptvalue" width="600"/>  
+<img src="https://github.com/user-attachments/assets/9d169bb0-50c5-4b5a-a6bf-01467a25ad87" alt="corruptvalue" width="650"/>  
 
 
-So I searched it in the dataset, and here it is :(  
-<img src="https://github.com/user-attachments/assets/081014a1-2cbb-4fe8-ba2d-e25166ae28f5" alt="corruptvalue2" width="600"/>
+- So I searched it in the dataset, and here it is :(  
+<img src="https://github.com/user-attachments/assets/081014a1-2cbb-4fe8-ba2d-e25166ae28f5" alt="corruptvalue2" width="650"/>
 
 
 - I then used the function pd.to_numeric in order to remove the corrupted value and turn the 'streams' column into a numerical data type  
@@ -53,8 +51,7 @@ So I searched it in the dataset, and here it is :(
 df['streams'] = pd.to_numeric(df['streams'], errors='coerce')
 ```
 
-- But when I tried to convert the other columns that are in string (object) data type, another error occured in columns 'in_deezer_playlists' and 'in_shazam_charts' since it's numerical values have commas  
-<img src="https://github.com/user-attachments/assets/777a5d01-aebb-4cee-9a4a-ceefd73135cc" alt="commaerror" width="600"/>    
+- But when I tried to convert the other columns that are in string (object) data type, another error occured in columns 'in_deezer_playlists' and 'in_shazam_charts' since it's numerical values have commas     
 
 - So I used the .replace() function to remove the commas then converted the columns into a numerical data type
 ```
