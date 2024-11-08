@@ -71,25 +71,41 @@ For this project, in majority I used **seaborn** as my primary data visualizatio
 
 # Overview of Dataset
 
-* In the given dataset, there are 953 rows and 24 columns
+* In the given dataset, there are 953 rows and 24 columns. *This also appears at the bottom left of the dataset when loading it*
 ```
-#Number of rows and columns of the Dataset. Note that the output of the .shape function is (Rows, Columns)
 rows, columns = df.shape
 print('Rows: ', rows, '\nColumns: ', columns)
 ```
 
 * The data types of each column are as follows. Note that object data type are string (object) data types. Also, the 'streams' and 'in_shazam_charts' are in float since both contain missing values
+```
+df.dtypes
+```
 ![Screenshot 2024-11-06 224728](https://github.com/user-attachments/assets/899f6b99-cb0c-495d-a250-594df7e6a671)
 
 * There is 1 missing value in 'streams', 50 missing values in 'in_shazam_charts', and 95 missing values in 'key'. *Note that the 1 missing value in streams is the removed corrupted value*
-
+```
+mcount = df.isnull().sum()
+print('COLUMN \t\t MISSING COUNT')
+print(mcount[mcount>0])
+```
+![Screenshot 2024-11-09 010457](https://github.com/user-attachments/assets/d425ce85-e4a8-4aa0-86e7-0fab5ccbab32)
 
 # Basic Descriptive Statistics
 
 * Mean, Median, and Standard Deviation of the streams column  
-**Insert Picture**
+```
+print('Mean: ', round(df['streams'].mean(), 2))
+print('Median: ', round(df['streams'].median(), 2))
+print('Standard Deviation: ', round(df['streams'].std(), 2))
+```
 
-* Relationship between released_year and artist_count  
+* Relationship between released_year and artist_count
+```
+plt.figure(figsize=(20,10))
+sns.stripplot(x='artist_count', y='released_year', data=df)
+```
+
 I noticed the trend where in the number of artists increases as the year progresses, in other words, more and more people are becoming an artist as the year goes by that by 2023, a lot of single artists have emereged. Also, the artist count increases as the year passes, hence many artists tries to make music in groups.  
 As for the outliers, I noticed that in the early 1930s, artists are formed in groups rather than being single.
 **Insert Picture**
