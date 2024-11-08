@@ -237,11 +237,29 @@ dfsnexploded = dfsnames.explode('artist(s)_name').reset_index(drop=True)
 plrank = dfsnexploded.groupby('artist(s)_name')['total_playlists'].sum()
 chrank = dfsnexploded.groupby('artist(s)_name')['total_charts'].sum()
 
-print('Playlist Ranking:\n', plrank.sort_values(ascending=False).head(5))
+psort = plrank.sort_values(ascending=False).head(5)
+csort = chrank.sort_values(ascending=False).head(5)
 
-print('\nCharts Ranking:\n', chrank.sort_values(ascending=False).head(5))
+dfplrank = pd.DataFrame(psort)
+dfchrank = pd.DataFrame(csort)
+
+#For the most frequent artist appeared in playlist
+plt.figure(figsize=(17,7))
+sns.barplot(x='artist(s)_name', y='total_playlists', data=dfplrank)
+plt.xlabel('Artist Name')
+plt.ylabel('Total Playlist')
+plt.title('Most frequently appearing artists in playlists')
+
+#For the most frequent artist appeared in chart
+plt.figure(figsize=(17,7))
+sns.barplot(x='artist(s)_name', y='total_charts', data=dfchrank)
+plt.xlabel('Artist Name')
+plt.ylabel('Total Charts')
+plt.title('Most frequently appearing artists in charts')
 ```
 For the most frequent artist appeared in playlist, we have The Weeknd, followed by Eminem, Ed Sheeran, Taylor Swift, and Bad Bunny  
 For the most frequent artist appeared in chart, we have the number one spot taken again by The Weeknd, followed by, Bad Bunny, Taylor Swift, Peso Pluma, and David Guetta  
-Meaning that The Weeknd is the only one consistent in the rankings.
+Meaning that The Weeknd is the only one consistent in the rankings.  
+![Screenshot 2024-11-09 055529](https://github.com/user-attachments/assets/08f794c6-020f-4334-9f3e-daa5f7513ede)  
+![Screenshot 2024-11-09 055548](https://github.com/user-attachments/assets/5152ed64-54d6-4f35-af2a-3909f3544712)
 
