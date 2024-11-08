@@ -79,10 +79,10 @@ print('Rows: ', rows, '\nColumns: ', columns)
 ```
 
 * The data types of each column are as follows. Note that object data type are string (object) data types. Also, the 'streams' and 'in_shazam_charts' are in float since both contain missing values
-**Insert Picture**
+![Screenshot 2024-11-06 224728](https://github.com/user-attachments/assets/899f6b99-cb0c-495d-a250-594df7e6a671)
 
 * There is 1 missing value in 'streams', 50 missing values in 'in_shazam_charts', and 95 missing values in 'key'. *Note that the 1 missing value in streams is the removed corrupted value*
-**Insert Picture**
+
 
 # Basic Descriptive Statistics
 
