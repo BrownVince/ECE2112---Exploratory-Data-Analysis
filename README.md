@@ -56,11 +56,11 @@ df['streams'] = pd.to_numeric(df['streams'], errors='coerce')
 - So I used the .replace() function to remove the commas then converted the columns into a numerical data type
 ```
 #Removing first the commas in in_deezer_playlists column then converting it to a numerical column
-df['in_deezer_playlists'] = df['in_deezer_playlists'].str.replace(',', '')
+df['in_deezer_playlists'] = df['in_deezer_playlists'].str.replace(', ', '')
 df['in_deezer_playlists'] = pd.to_numeric(df['in_deezer_playlists'], errors='coerce')
 
 #Removing first the commas in in_shazam_charts column then converting it to a numerical column
-df['in_shazam_charts'] = df['in_shazam_charts'].str.replace(',', '')
+df['in_shazam_charts'] = df['in_shazam_charts'].str.replace(', ', '')
 df['in_shazam_charts'] = pd.to_numeric(df['in_shazam_charts'], errors='coerce')
 ```
 *Note that when using the pd.to_numeric() function and set the parameters of error to 'coerce', python will convert the columns into numerical data and remove string entries, replacing it with missing values (NaN), making the entire column into a float data type, since float can handle NaN values. But if the column is complete with no missing values, it will convert it into an integer data type.*  
@@ -150,7 +150,7 @@ Congrats to Bad Bunny for having the highest number of tracks garnering a total 
 
 # Temporal Trends
 
-* **Number of tracks released per year**
+* **Number of tracks released per year**  
 In analyzing this problem, I used the .groupby() function in order to group tracks according to what year they are released and then counted how many tracks are present in a specific year. In plotting the data, I used seaborn's barplot.
 ```
 numtrackyear = df.groupby('released_year')['track_name'].count()
@@ -161,7 +161,7 @@ plt.ylabel('Number of Tracks')
 Based on the given bar graph, we can see that the number of tracks released increases as year progresses. As early as 1930 up to 2023, 1930? That's very old.  
 ![Screenshot 2024-11-09 053916](https://github.com/user-attachments/assets/bc0cdd9b-c3dc-4512-9187-43c17cf2196b)
 
-* **Number of tracks released per month**
+* **Number of tracks released per month**  
 This problem is the same with the number of tracks released per year, the only difference is that I grouped the tracks according to what month they are released in.
 ```
 numtrackmnth = df.groupby('released_month')['track_name'].count()
@@ -173,7 +173,7 @@ Based on the graph outcome, the number of tracks released per month does not fol
 ![Screenshot 2024-11-09 053935](https://github.com/user-attachments/assets/61e8de38-5b31-48fb-aee4-c96b0b7141bd)
 
 # Genre and Music Characteristics
-* **Correlation between streams and musical attributes**
+* **Correlation between streams and musical attributes**  
 In coding this problem, I used a simple syntax using seaborn's scatterplot in order to determine the correletion between streams and different musical attributes and we dont need to set the names of the x and y axis since seaborn will automatically set the name of the axis to the name of the column you are plotting.  
 ```
 plt.figure(figsize=(10,10))
@@ -190,7 +190,7 @@ After creating all the graphs, I noticed that almost all of them have little to 
 <img src="https://github.com/user-attachments/assets/64711d7b-afa4-4a56-8ab5-a57ef55e50a7" width="300"/> 
 <img src="https://github.com/user-attachments/assets/1ee6b0a9-2f7a-4482-aa09-264aacb81506" width="300"/> 
 
-* **Correlation between danceability_% and energy_%**
+* **Correlation between danceability_% and energy_%**  
 The syntax for this problem is the same as the previous one, but we are now comparing from musical attribute to another attribute.
 ```
 plt.figure(figsize=(10,10))
@@ -199,7 +199,8 @@ plt.xticks(range(0,101,20))
 ```
 In the output graph below, we can see that danceability and energy has little correlation since we can see that the movement of both danceability and energy are in unison, meaning they move in the same direction, where the energy increases, danceability also increases.  
 ![Screenshot 2024-11-09 061152](https://github.com/user-attachments/assets/7db93760-f36f-4886-bd61-d60f89b1d928)
-* **Correlation between valence_% and acousticness_%**
+
+* **Correlation between valence_% and acousticness_%**  
 The syntax for this one is the same as the previous one, the only difference is that we are now comparing acousticness and valence.
 ```
 plt.figure(figsize=(10,10))
@@ -208,6 +209,7 @@ plt.xticks(range(0,101,20))
 ```
 In contrast with the previous one, valence and acousticness has no correlation at all since they are in opposition with each other.  
 ![Screenshot 2024-11-09 061206](https://github.com/user-attachments/assets/3b7e30e3-04ec-4ee7-8c9b-e1033ce4e4d9)
+
 # Platform Popularity
 * **Comparing number of tracks in spotify_playlists, apple_playlists, and deezer_playlists**  
 When I compared the number of tracks in the different platforms, I first created a new variable containing a Data Frame with the total or sum of the values of each platform's columns from the original data set using the function df['PLATFORM NAME'].sum() and stored it in a new column named 'Total # of Tracks' and assigned it according to their names by creating another column containing the names of each platform.
@@ -237,7 +239,7 @@ As usual, as a result, spotify favors the most popular tracks, deezer as second,
 **INSERT PIC**
 
 # Advanced Analysis
-* **Patterns among tracks with the same key and mode based on streams data**
+* **Patterns among tracks with the same key and mode based on streams data**  
 Again, in this problem I used the .groupby() function by grouping the tracks according to their specific keys or mode and added the all the streams value in a specific group by using the .sum() function.
 And since when using the .groupby() function, we get a series as a result, hence we need to convert the data into a data frame in order to graph the values. And of course, since I'm a Seaborn fan, I used seaborn's barplot again to plot the values, with key or mode in the x-axis, and streams on the y-axis.
 ```
@@ -258,7 +260,7 @@ As a result, we get the key C# as the highest playing key, and mode Major as the
 ![Screenshot 2024-11-09 060253](https://github.com/user-attachments/assets/6974ed12-5a97-4422-8a7f-ff416c438b1a)  
 
 
-* **Most frequently appearing artists in playlists or charts**
+* **Most frequently appearing artists in playlists or charts**  
 Lastly, in this problem we need to split and explode the artists column again since there are multiple artists present in a single cell then make the splitted column into a dataframe in order to add a column that contains the total number of playlists or charts for each artist, so we set the .sum(axis=1) in order to add total playlist or chart for each artist in a row, and not the sum of the entire column. Then after that, we need to explode the resulting data frame in order to separate artists into individual cells or rows. Then we need to group again the set based on artist name using the .groupby() function and add the total playlist or charts for each group (now known as a single artist name). Sorting the values to descending order and display only 5, we now get the top 5 artists for playlists and charts. 
 ```
 dfsnames = pd.DataFrame(splitnames, columns=['artist(s)_name'])
