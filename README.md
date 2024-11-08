@@ -24,6 +24,7 @@ Python - Exploratory Data Analysis on Spotify 2023 Dataset
 ```
 import pandas as pd
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 df = pd.read_csv('spotify2023.csv')
 ```
@@ -71,19 +72,22 @@ For this project, in majority I used **seaborn** as my primary data visualizatio
 
 # Overview of Dataset
 
-* In the given dataset, there are 953 rows and 24 columns. *This also appears at the bottom left of the dataset when loading it*
+* **In the given dataset, there are 953 rows and 24 columns.** *This also appears at the bottom left of the dataset when loading it*  
+The .shape function helps us identify the dimensions of the dataset in rows and columns  
 ```
 rows, columns = df.shape
 print('Rows: ', rows, '\nColumns: ', columns)
 ```
 
-* The data types of each column are as follows. Note that object data type are string (object) data types. Also, the 'streams' and 'in_shazam_charts' are in float since both contain missing values
+* **The data types of each column are shown in a table using the .dtype function.** Note that object data type are string (object) data types. Also, the 'streams' and 'in_shazam_charts' are in float since both contain missing values  
+In order to show the data types of each column, the .dtype function is a must function in order to get the data types of each column in a dataset. This helps when your dataset has a lot of columns, using this will just display all your columns and their data types in a table.
 ```
 df.dtypes
 ```
 ![Screenshot 2024-11-06 224728](https://github.com/user-attachments/assets/899f6b99-cb0c-495d-a250-594df7e6a671)
 
-* There is 1 missing value in 'streams', 50 missing values in 'in_shazam_charts', and 95 missing values in 'key'. *Note that the 1 missing value in streams is the removed corrupted value*
+* There is 1 missing value in 'streams', 50 missing values in 'in_shazam_charts', and 95 missing values in 'key'. *Note that the 1 missing value in streams is the removed corrupted value*  
+The function .isnull() helps in finding cells that are empty or of no value, together with the .sum() function, it will add the total number of cells that are empty. Then after that, we need to print columns with empty cells and on how many empty cells are there by indexing and filtering the data that have more than 0 values.
 ```
 mcount = df.isnull().sum()
 print('COLUMN \t\t MISSING COUNT')
@@ -93,38 +97,149 @@ print(mcount[mcount>0])
 
 # Basic Descriptive Statistics
 
-* Mean, Median, and Standard Deviation of the streams column  
+* **Mean, Median, and Standard Deviation of the streams column**  
+In finding the mean, median, and std, python has a standard built in function to use in order to find the results you want in a fast and easy way.
 ```
 print('Mean: ', round(df['streams'].mean(), 2))
 print('Median: ', round(df['streams'].median(), 2))
 print('Standard Deviation: ', round(df['streams'].std(), 2))
 ```
+![Screenshot 2024-11-09 011210](https://github.com/user-attachments/assets/241a9a07-489d-4c2f-956f-66ecc2920f1e)
 
-* Relationship between released_year and artist_count
+* **Relationship between released_year and artist_count**  
+In displaying the relationship between the two, I used seaborn's scatterplot/stripplot.
 ```
-plt.figure(figsize=(20,10))
+plt.figure(figsize=(24,10))
 sns.stripplot(x='artist_count', y='released_year', data=df)
 ```
-
-I noticed the trend where in the number of artists increases as the year progresses, in other words, more and more people are becoming an artist as the year goes by that by 2023, a lot of single artists have emereged. Also, the artist count increases as the year passes, hence many artists tries to make music in groups.  
-As for the outliers, I noticed that in the early 1930s, artists are formed in groups rather than being single.
-**Insert Picture**
+I noticed the trend where in the number of artists increases as the year progresses, in other words, more and more people are becoming an artist as the year goes by that by 2023, a lot of single artists have emereged. Also, the artist count increases as the year passes, hence many artists tries to make music in groups.   
+As for the outliers, I noticed that in the early 1930s, artists are formed in groups rather than being single.  
+![Screenshot 2024-11-07 004254](https://github.com/user-attachments/assets/1ed0476d-f969-4934-beae-378aace1022e)
 
 # Top Performers
 
-* The top 5 most streamed tracks are as follows
+* **The top 5 most streamed tracks** are as follows  
+In finding the top 5 most streamed tracks, we first need to sort the date set using the .sort_values() function and set the parameters by='streams', since we want to output most streamed tracks, then set ascending to false in order tp have a descending order. After that, display only five using the .head() function and set the parameters to 5 and display only columns 'track_name' and 'streams'
+```
+toptracks = df.sort_values(by='streams', ascending=False)
+top5tracks = toptracks.head(5)[['track_name', 'streams']]
+
+plt.figure(figsize=(17,7))
+sns.barplot(x='track_name', y='streams', data=top5tracks)
+plt.xlabel('Total Streams')
+plt.ylabel('Track Name')
+```
+With the number one spot, we have Blinding Lights! as the most streamed track making it the most popular one, followed by Shape of You, Someone You Loved, Dance Monkey, and Sunflower - Spider-Man: Into the Spider-Verse.  
+*Additionaly, if you want to display the artists that owns these tracks, you can add the column name in this code toptracks.head(5)[['COLUMN NAME']]*
 **Insert Picture**
 
-* Top 5 most frequent artists based on the number of tracks
+* **Top 5 most frequent artists based on the number of tracks**    
+In this problem, I was having a hard time at first since I noticed that some cells have multiple artists.  
+So I first split the column of artist(s)_name in order to explode the column. The .explode() function will make individual rows for each artists, hence separating multiple artists that are present in a single cell, creating more rows. After that, I used the .value_counts() function in order to count duplicate entries for each individual cell in a column, note that when using the .value_counts() function, it will automatically present the output in a descending order, hence we can just add .head(5) in order to display the top 5 frequent artists based on the number of tracks.
+```
+splitnames = df['artist(s)_name'].str.split(', ')
+srows = splitnames.explode()
+freqartist = srows.value_counts().head(5)
+dffreqartist = pd.DataFrame(freqartist)
+
+plt.figure(figsize=(17,7))
+sns.barplot(x='artist(s)_name', y='count', data=dffreqartist)
+plt.xlabel('Count')
+plt.ylabel('Artist Name')
+```
+Congrats to Bad Bunny for having the highest number of tracks garnering a total number of 40 tracks! followed by, Taylor Swift, The Weeknd, SZA, and Kendrick Lamar.  
 **Insert Picture**
 
 # Temporal Trends
 
-* Number of tracks released per year
-Based on the given bar graph, we can see that the tracks released increases as year progresses
+* **Number of tracks released per year**
+In analyzing this problem, I used the .groupby() function in order to group tracks according to what year they are released and then counted how many tracks are present in a specific year. In plotting the data, I used seaborn's barplot.
+```
+numtrackyear = df.groupby('released_year')['track_name'].count()
+plt.figure(figsize=(24,10))
+sns.barplot(data=numtrackyear)
+plt.ylabel('Number of Tracks')
+```
+Based on the given bar graph, we can see that the number of tracks released increases as year progresses. As early as 1930 up to 2023, 1930? That's very old.
 **Insert Picture**
 
-* Number of tracks released per month
+* **Number of tracks released per month**
+This problem is the same with the number of tracks released per year, the only difference is that I grouped the tracks according to what month they are released in.
+```
+numtrackmnth = df.groupby('released_month')['track_name'].count()
+plt.figure(figsize=(24,10))
+sns.barplot(data=numtrackmnth)
+plt.ylabel('Number of Tracks')
+```
 Based on the graph outcome, the number of tracks released per month does not follow any noticeable trends, meaning that artists release their music at any time of the year. Also, the month of January has the highest number of tracks released **Paraphrase**
 
 # Genre and Music Characteristics
+
+# Platform Popularity
+* **Comparing number of tracks in spotify_playlists, apple_playlists, and deezer_playlists**  
+When I compared the number of tracks in the different platforms, I first created a new variable containing a Data Frame with the total or sum of the values of each platform's columns from the original data set using the function df['PLATFORM NAME'].sum() and stored it in a new column named 'Total # of Tracks' and assigned it according to their names by creating another column containing the names of each platform.
+Then I used seaborn's barplot to plot the values with names in the x-axis, and their values in the y-axis.
+```
+ntracks = pd.DataFrame({'Platform': ['Spotify', 'Apple', 'Deezer'],
+                       'Total # of Tracks': [df['in_spotify_playlists'].sum(), df['in_apple_playlists'].sum(), 
+                                                df['in_deezer_playlists'].sum()]})
+print(ntracks)
+sns.barplot(x='Platform', y='Total # of Tracks', data=ntracks)
+```
+We can see that spotify domainates in the number of tracks present in their playlists. The second place belongs to deezer, and the third place belongs to apple.
+**INSERT PIC**
+
+* **Which platform favors the most popular tracks**  
+In this problem, it is the same as the previous one, but this finds which platform has the highest number of most popular tracks present in their playlist. Hence, we start by selecting the most popular tracks, whereas I cosidered the top 10 tracks.
+```
+top10 = toptracks.head(10)[['track_name', 'streams', 'in_spotify_playlists', 'in_apple_playlists', 'in_deezer_playlists']]
+
+poppform = pd.DataFrame({'Platform': ['Spotify', 'Apple', 'Deezer'],
+                       'Total # of Playlists': [top10['in_spotify_playlists'].sum(), top10['in_apple_playlists'].sum(), 
+                                                top10['in_deezer_playlists'].sum()]})
+print(poppform)
+sns.barplot(x='Platform', y='Total # of Playlists', data=poppform)
+```
+As usual, as a result, spotify favors the most popular tracks, deezer as second, and apple being third.
+**INSERT PIC**
+
+# Advanced Analysis
+* **Patterns among tracks with the same key and mode based on streams data**
+Again, in this problem I used the .groupby() function by grouping the tracks according to their specific keys or mode and added the all the streams value in a specific group by using the .sum() function.
+And since when using the .groupby() function, we get a series as a result, hence we need to convert the data into a data frame in order to graph the values. And of course, since I'm a Seaborn fan, I used seaborn's barplot again to plot the values, with key or mode in the x-axis, and streams on the y-axis.
+```
+#Based on the streams data, patterns among tracks with the same key
+skey = df.groupby('key')['streams'].sum()
+dfskey = pd.DataFrame(skey)
+plt.figure(figsize=(12,7))
+sns.barplot(x='key', y='streams', data=dfskey)
+
+#Based on the streams data, patterns among tracks with the same mode (Major vs. Minor)?
+smode = df.groupby('mode')['streams'].sum()
+dfsmode = pd.DataFrame(smode)
+plt.figure(figsize=(7,7))
+sns.barplot(x='mode', y='streams', data=dfsmode)
+```
+As a result, we get the key C# as the highest playing key, and mode Major as the highest playing mode. Meaning that people like to listen on key C# and mode major the most. While less people listen to key D# and mode minor.
+**INSERT PIC**
+
+* **Most frequently appearing artists in playlists or charts**
+Lastly, in this problem we need to split and explode the artists column again since there are multiple artists present in a single cell then make the splitted column into a dataframe in order to add a column that contains the total number of playlists or charts for each artist, so we set the .sum(axis=1) in order to add total playlist or chart for each artist in a row, and not the sum of the entire column. Then after that, we need to explode the resulting data frame in order to separate artists into individual cells or rows. Then we need to group again the set based on artist name using the .groupby() function and add the total playlist or charts for each group (now known as a single artist name). Sorting the values to descending order and display only 5, we now get the top 5 artists for playlists and charts. 
+```
+dfsnames = pd.DataFrame(splitnames, columns=['artist(s)_name'])
+dfsnames['total_playlists'] = df[['in_spotify_playlists', 'in_apple_playlists', 'in_deezer_playlists']].sum(axis=1)
+dfsnames['total_charts'] = df[['in_spotify_charts', 'in_apple_charts', 'in_deezer_charts', 'in_shazam_charts']].sum(axis=1)
+
+dfsnexploded = dfsnames.explode('artist(s)_name').reset_index(drop=True)
+
+plrank = dfsnexploded.groupby('artist(s)_name')['total_playlists'].sum()
+chrank = dfsnexploded.groupby('artist(s)_name')['total_charts'].sum()
+
+print('Playlist Ranking:\n', plrank.sort_values(ascending=False).head(5))
+
+print('\nCharts Ranking:\n', chrank.sort_values(ascending=False).head(5))
+```
+For the most frequent artist appeared in playlist, we have The Weeknd, followed by Eminem, Ed Sheeran, Taylor Swift, and Bad Bunny  
+For the most frequent artist appeared in chart, we have the number one spot taken again by The Weeknd, followed by, Bad Bunny, Taylor Swift, Peso Pluma, and David Guetta  
+Meaning that The Weeknd is the only one consistent in the rankings.
+**INSERT PIC**
