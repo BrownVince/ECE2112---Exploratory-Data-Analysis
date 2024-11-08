@@ -176,6 +176,22 @@ Based on the graph outcome, the number of tracks released per month does not fol
 ![Screenshot 2024-11-09 053935](https://github.com/user-attachments/assets/61e8de38-5b31-48fb-aee4-c96b0b7141bd)
 
 # Genre and Music Characteristics
+* **Correlation between streams and musical attributes**
+In coding this problem, I used a simple syntax using seaborn's scatterplot in order to determine the correletion between streams and different musical attributes  
+```
+plt.figure(figsize=(10,10))
+sns.scatterplot(x='NAME OF MUSICAL ATTRIBUTE', y='streams', data=df)
+```
+After creating all the graphs, I noticed that almost all of them have little to no correlation. Meaning that music types totally depends on the taste of a person.  
+*Compilation of Graphs:*  
+
+* **Correlation between danceability_% and energy_%**
+```
+```
+
+* **Correlation between valence_% and acousticness_%**
+```
+```
 
 # Platform Popularity
 * **Comparing number of tracks in spotify_playlists, apple_playlists, and deezer_playlists**  
@@ -222,8 +238,10 @@ dfsmode = pd.DataFrame(smode)
 plt.figure(figsize=(7,7))
 sns.barplot(x='mode', y='streams', data=dfsmode)
 ```
-As a result, we get the key C# as the highest playing key, and mode Major as the highest playing mode. Meaning that people like to listen on key C# and mode major the most. While less people listen to key D# and mode minor.
-**INSERT PIC**
+As a result, we get the key C# as the highest playing key, and mode Major as the highest playing mode. Meaning that people like to listen on key C# and mode major the most. While less people listen to key D# and mode minor.  
+![Screenshot 2024-11-09 060240](https://github.com/user-attachments/assets/57c6db37-1935-4ebc-abcd-6e578b35059f)  
+![Screenshot 2024-11-09 060253](https://github.com/user-attachments/assets/6974ed12-5a97-4422-8a7f-ff416c438b1a)  
+
 
 * **Most frequently appearing artists in playlists or charts**
 Lastly, in this problem we need to split and explode the artists column again since there are multiple artists present in a single cell then make the splitted column into a dataframe in order to add a column that contains the total number of playlists or charts for each artist, so we set the .sum(axis=1) in order to add total playlist or chart for each artist in a row, and not the sum of the entire column. Then after that, we need to explode the resulting data frame in order to separate artists into individual cells or rows. Then we need to group again the set based on artist name using the .groupby() function and add the total playlist or charts for each group (now known as a single artist name). Sorting the values to descending order and display only 5, we now get the top 5 artists for playlists and charts. 
