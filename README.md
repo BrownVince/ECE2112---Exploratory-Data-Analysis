@@ -161,8 +161,8 @@ plt.figure(figsize=(24,10))
 sns.barplot(data=numtrackyear)
 plt.ylabel('Number of Tracks')
 ```
-Based on the given bar graph, we can see that the number of tracks released increases as year progresses. As early as 1930 up to 2023, 1930? That's very old.
-**Insert Picture**
+Based on the given bar graph, we can see that the number of tracks released increases as year progresses. As early as 1930 up to 2023, 1930? That's very old.  
+![Screenshot 2024-11-09 053916](https://github.com/user-attachments/assets/bc0cdd9b-c3dc-4512-9187-43c17cf2196b)
 
 * **Number of tracks released per month**
 This problem is the same with the number of tracks released per year, the only difference is that I grouped the tracks according to what month they are released in.
@@ -172,7 +172,8 @@ plt.figure(figsize=(24,10))
 sns.barplot(data=numtrackmnth)
 plt.ylabel('Number of Tracks')
 ```
-Based on the graph outcome, the number of tracks released per month does not follow any noticeable trends, meaning that artists release their music at any time of the year. Also, the month of January has the highest number of tracks released **Paraphrase**
+Based on the graph outcome, the number of tracks released per month does not follow any noticeable trends, meaning that artists release their music at any time of the year. Also, the month of January has the highest number of tracks released.    
+![Screenshot 2024-11-09 053935](https://github.com/user-attachments/assets/61e8de38-5b31-48fb-aee4-c96b0b7141bd)
 
 # Genre and Music Characteristics
 
