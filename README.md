@@ -177,22 +177,40 @@ Based on the graph outcome, the number of tracks released per month does not fol
 
 # Genre and Music Characteristics
 * **Correlation between streams and musical attributes**
-In coding this problem, I used a simple syntax using seaborn's scatterplot in order to determine the correletion between streams and different musical attributes  
+In coding this problem, I used a simple syntax using seaborn's scatterplot in order to determine the correletion between streams and different musical attributes and we dont need to set the names of the x and y axis since seaborn will automatically set the name of the axis to the name of the column you are plotting.  
 ```
 plt.figure(figsize=(10,10))
 sns.scatterplot(x='NAME OF MUSICAL ATTRIBUTE', y='streams', data=df)
 ```
 After creating all the graphs, I noticed that almost all of them have little to no correlation. Meaning that music types totally depends on the taste of a person.  
 *Compilation of Graphs:*  
+<img src="https://github.com/user-attachments/assets/b5ef3976-2dea-46e9-ba0f-88de7cd0a55a" width="300"/> 
+<img src="https://github.com/user-attachments/assets/5c7223c4-f6d1-4959-920d-275f4c1b419f" width="300"/> 
+<img src="https://github.com/user-attachments/assets/72164182-d817-42ce-aebb-5e907c13ff27" width="300"/> 
+<img src="https://github.com/user-attachments/assets/bc46b0c5-136b-4610-9953-e29bb45d88fb" width="300"/> 
+<img src="https://github.com/user-attachments/assets/ac3186a4-2c76-445f-b079-398c095a15c9" width="300"/> 
+<img src="https://github.com/user-attachments/assets/abb67ebe-2a6d-452e-afda-74b65104d60d" width="300"/> 
+<img src="https://github.com/user-attachments/assets/64711d7b-afa4-4a56-8ab5-a57ef55e50a7" width="300"/> 
+<img src="https://github.com/user-attachments/assets/1ee6b0a9-2f7a-4482-aa09-264aacb81506" width="300"/> 
 
 * **Correlation between danceability_% and energy_%**
+The syntax for this problem is the same as the previous one, but we are now comparing from musical attribute to another attribute.
 ```
+plt.figure(figsize=(10,10))
+sns.scatterplot(x='danceability_%', y='energy_%', data=df)
+plt.xticks(range(0,101,20))
 ```
-
+In the output graph below, we can see that danceability and energy has little correlation since we can see that the movement of both danceability and energy are in unison, meaning they move in the same direction, where the energy increases, danceability also increases.  
+![Screenshot 2024-11-09 061152](https://github.com/user-attachments/assets/7db93760-f36f-4886-bd61-d60f89b1d928)
 * **Correlation between valence_% and acousticness_%**
+The syntax for this one is the same as the previous one, the only difference is that we are now comparing acousticness and valence.
 ```
+plt.figure(figsize=(10,10))
+sns.scatterplot(x='acousticness_%', y='valence_%', data=df)
+plt.xticks(range(0,101,20))
 ```
-
+In contrast with the previous one, valence and acousticness has no correlation at all since they are in opposition with each other.  
+![Screenshot 2024-11-09 061206](https://github.com/user-attachments/assets/3b7e30e3-04ec-4ee7-8c9b-e1033ce4e4d9)
 # Platform Popularity
 * **Comparing number of tracks in spotify_playlists, apple_playlists, and deezer_playlists**  
 When I compared the number of tracks in the different platforms, I first created a new variable containing a Data Frame with the total or sum of the values of each platform's columns from the original data set using the function df['PLATFORM NAME'].sum() and stored it in a new column named 'Total # of Tracks' and assigned it according to their names by creating another column containing the names of each platform.
