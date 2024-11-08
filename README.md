@@ -244,4 +244,4 @@ print('\nCharts Ranking:\n', chrank.sort_values(ascending=False).head(5))
 For the most frequent artist appeared in playlist, we have The Weeknd, followed by Eminem, Ed Sheeran, Taylor Swift, and Bad Bunny  
 For the most frequent artist appeared in chart, we have the number one spot taken again by The Weeknd, followed by, Bad Bunny, Taylor Swift, Peso Pluma, and David Guetta  
 Meaning that The Weeknd is the only one consistent in the rankings.
-**INSERT PIC**
+
