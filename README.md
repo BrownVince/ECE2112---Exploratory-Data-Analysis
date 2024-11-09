@@ -187,6 +187,8 @@ plt.title('Correlation between streams and musical attributes')
 plt.xlabel('Streams')
 plt.ylabel('Musical Attributes')
 ```
+We can see the given result below that all musical attributes are in negative correlation with streams, and a negative correlation means that it is inversely proportional to each other where one increases, and the other one decreases. The highest in correlation withstream is BPM which is closer to 0, but this doesn't tell us that BPM influences the number of streams since it is a negative correlation  
+![Screenshot 2024-11-09 193928](https://github.com/user-attachments/assets/35eef0d9-fb33-4320-a611-cefe3f99ab92)  
 
 You can also determine the correletion between streams and different musical attributes by using seaborn's scatterplot to identify trends and patterns. We also dont need to set the names of the x and y axis since seaborn will automatically set the name of the axis to the name of the column you are plotting.  
 *Note that this will take a lot of time, since we are plotting a variable to a variable one at a time, but to give you an idea, I made it just for you!*
@@ -236,7 +238,7 @@ ntracks = pd.DataFrame({'Platform': ['Spotify', 'Apple', 'Deezer'],
 print(ntracks)
 sns.barplot(x='Platform', y='Total # of Tracks', data=ntracks)
 ```
-We can see that spotify domainates in the number of tracks present in their playlists. The second place belongs to deezer, and the third place belongs to apple. Hence, spotify favors the most streamed tracks in spotify 2023.  
+We can see that spotify dominates in the number of tracks present in their playlists. The second place belongs to deezer, and the third place belongs to apple. Hence, spotify favors the most streamed tracks in spotify 2023.  
 ![Screenshot 2024-11-09 174748](https://github.com/user-attachments/assets/ba86ee17-c85f-4092-8047-f11da97cd525)
 
 
@@ -304,13 +306,15 @@ sns.barplot(data=deezerch)
 plt.figure(figsize=(7,7))
 sns.barplot(data=shazamch)
 ```
-In the given graphs for the most frequent artists in each playlist below.
-*SUMMARY OF GRAPHS IN MOST FREQUENT ARTISTS IN DIFFERENT PLAYLISTS*  
+In the given graphs for the most frequent artists in each playlist below, we can see that The Weeknd takes the number one spot in the spotify playlist, and apple playlist, while eminem tops in deezer playlist. Also, Eminem is ranked 2nd in Spotify Playlist, meaning that The Weeknd and Eminem are almost consistently appears in playlists.  
+*Scroll below for results in most frequent artists in charts*  
+**SUMMARY OF GRAPHS IN MOST FREQUENT ARTISTS IN DIFFERENT PLAYLISTS**  
 ![Screenshot 2024-11-09 174116](https://github.com/user-attachments/assets/2a07bd2c-641a-4c6b-8c1a-71452c618125)
 ![Screenshot 2024-11-09 174131](https://github.com/user-attachments/assets/8d76480b-3aa1-43f0-860c-870f29c1d6ff)
-![Screenshot 2024-11-09 174105](https://github.com/user-attachments/assets/83d59b67-d8fc-4b3b-b01e-f46374b2369d)
+![Screenshot 2024-11-09 174105](https://github.com/user-attachments/assets/83d59b67-d8fc-4b3b-b01e-f46374b2369d)  
 
-*SUMMARY OF GRAPHS IN MOST FREQUENT ARTISTS IN DIFFERENT CHARTS*  
+On the other hand, for the most frequent artists appeared on charts, The Weeknd takes the number one spot again in apple charts and shazam charts, while Bad Bunny takes the number one spot in spotify charts and deezer charts. While The Weeknd takes 2nd spot in spotify charts and Bad Bunny takes 2nd spot in apple charts. Hence we can conclude that The Weeknd and Bad Bunny appeared consistently in charts.  
+**SUMMARY OF GRAPHS IN MOST FREQUENT ARTISTS IN DIFFERENT CHARTS**  
 ![Screenshot 2024-11-09 174244](https://github.com/user-attachments/assets/5c662b01-fb12-424f-a9c5-ce79c9842c1a)
 ![Screenshot 2024-11-09 174254](https://github.com/user-attachments/assets/ad01e827-f061-4144-86f2-b034a58dd0a4)
 ![Screenshot 2024-11-09 174151](https://github.com/user-attachments/assets/0bb7a1a2-8507-4ad8-97ec-2104c481a99b)
