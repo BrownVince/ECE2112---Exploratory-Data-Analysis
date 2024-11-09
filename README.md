@@ -319,3 +319,10 @@ On the other hand, for the most frequent artists appeared on charts, The Weeknd 
 ![Screenshot 2024-11-09 174254](https://github.com/user-attachments/assets/ad01e827-f061-4144-86f2-b034a58dd0a4)
 ![Screenshot 2024-11-09 174151](https://github.com/user-attachments/assets/0bb7a1a2-8507-4ad8-97ec-2104c481a99b)
 ![Screenshot 2024-11-09 174233](https://github.com/user-attachments/assets/dfc0c08b-16cc-4c51-9cd8-f33bc7dc3602)
+
+# Experiences and Conclusion
+To conclude this said project, I can say to myself that I gained lots of knowledge when dealing with pandas, matplots, and seaborn. I know that I can use this knowledge in the future when dealing with complicated datsets just like this one.  
+
+As for my experiences, it was a crazy rollercoaster ride, since I found myself in tight spots, dealing with major data cleaning and analyzation. But I found it fun since I can also gain knowledge on different informations while coding. Just like this spotify dataset, I just found out that there is a negative correlation between streams and musical attributes, and I find that true since I also have my personal taste when it comes to music.  
+
+That's all, Thank you!
