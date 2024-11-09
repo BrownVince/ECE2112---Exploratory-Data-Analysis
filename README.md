@@ -173,8 +173,23 @@ Based on the graph outcome, the number of tracks released per month does not fol
 ![Screenshot 2024-11-09 053935](https://github.com/user-attachments/assets/61e8de38-5b31-48fb-aee4-c96b0b7141bd)
 
 # Genre and Music Characteristics
-* **Correlation between streams and musical attributes**  
-In coding this problem, I used a simple syntax using seaborn's scatterplot in order to determine the correletion between streams and different musical attributes and we dont need to set the names of the x and y axis since seaborn will automatically set the name of the axis to the name of the column you are plotting.  
+* **Correlation between streams and musical attributes**
+In order to determine the correlation between streams and musical attributes, we need to use the .corrwith function in order to correlate multiple variables to a single variable then storing it into a variable. Then using seaborn's heatmap tool, we can visually represent the correlation.  
+```
+corrstma = df[['bpm', 'danceability_%', 'valence_%', 
+               'energy_%', 'acousticness_%', 'instrumentalness_%', 'liveness_%', 'speechiness_%']].corrwith(df['streams'])
+
+dfcorrstma = pd.DataFrame(corrstma)
+
+plt.figure(figsize=(7,7))
+sns.heatmap(dfcorrstma, annot=True, cmap='Reds')
+plt.title('Correlation between streams and musical attributes')
+plt.xlabel('Streams')
+plt.ylabel('Musical Attributes')
+```
+
+You can also determine the correletion between streams and different musical attributes by using seaborn's scatterplot to identify trends and patterns. We also dont need to set the names of the x and y axis since seaborn will automatically set the name of the axis to the name of the column you are plotting.  
+*Note that this will take a lot of time, since we are plotting a variable to a variable one at a time, but to give you an idea, I made it just for you!*
 ```
 plt.figure(figsize=(10,10))
 sns.scatterplot(x='NAME OF MUSICAL ATTRIBUTE', y='streams', data=df)
@@ -221,7 +236,8 @@ ntracks = pd.DataFrame({'Platform': ['Spotify', 'Apple', 'Deezer'],
 print(ntracks)
 sns.barplot(x='Platform', y='Total # of Tracks', data=ntracks)
 ```
-We can see that spotify domainates in the number of tracks present in their playlists. The second place belongs to deezer, and the third place belongs to apple.
+We can see that spotify domainates in the number of tracks present in their playlists. The second place belongs to deezer, and the third place belongs to apple. Hence, spotify favors the most streamed tracks in spotify 2023.  
+![Screenshot 2024-11-09 174748](https://github.com/user-attachments/assets/ba86ee17-c85f-4092-8047-f11da97cd525)
 
 
 # Advanced Analysis
@@ -288,12 +304,13 @@ sns.barplot(data=deezerch)
 plt.figure(figsize=(7,7))
 sns.barplot(data=shazamch)
 ```
-*SUMMARY OF GRAPHS IN MOST FREQUENT ARTISTS IN DIFFERENT PLAYLISTS*
+In the given graphs for the most frequent artists in each playlist below.
+*SUMMARY OF GRAPHS IN MOST FREQUENT ARTISTS IN DIFFERENT PLAYLISTS*  
 ![Screenshot 2024-11-09 174116](https://github.com/user-attachments/assets/2a07bd2c-641a-4c6b-8c1a-71452c618125)
 ![Screenshot 2024-11-09 174131](https://github.com/user-attachments/assets/8d76480b-3aa1-43f0-860c-870f29c1d6ff)
 ![Screenshot 2024-11-09 174105](https://github.com/user-attachments/assets/83d59b67-d8fc-4b3b-b01e-f46374b2369d)
 
-*SUMMARY OF GRAPHS IN MOST FREQUENT ARTISTS IN DIFFERENT CHARTS*
+*SUMMARY OF GRAPHS IN MOST FREQUENT ARTISTS IN DIFFERENT CHARTS*  
 ![Screenshot 2024-11-09 174244](https://github.com/user-attachments/assets/5c662b01-fb12-424f-a9c5-ce79c9842c1a)
 ![Screenshot 2024-11-09 174254](https://github.com/user-attachments/assets/ad01e827-f061-4144-86f2-b034a58dd0a4)
 ![Screenshot 2024-11-09 174151](https://github.com/user-attachments/assets/0bb7a1a2-8507-4ad8-97ec-2104c481a99b)
