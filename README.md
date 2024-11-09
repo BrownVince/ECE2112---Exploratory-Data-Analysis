@@ -222,7 +222,7 @@ print(ntracks)
 sns.barplot(x='Platform', y='Total # of Tracks', data=ntracks)
 ```
 We can see that spotify domainates in the number of tracks present in their playlists. The second place belongs to deezer, and the third place belongs to apple.
-**INSERT PIC**
+
 
 # Advanced Analysis
 * **Patterns among tracks with the same key and mode based on streams data**  
@@ -247,7 +247,7 @@ As a result, we get the key C# as the highest playing key, and mode Major as the
 
 
 * **Most frequently appearing artists in playlists or charts**  
-Lastly, in this problem we need to split and explode the artists column again since there are multiple artists present in a single cell then make the splitted column into a dataframe in order to add the columns that contains the different playlists and charts, so we just need to explode the cells and groupby artists and add the total playlists and charts of each artist using the .sum() function. Sorting the values to descending order and display only 5, we now get the top 5 artists for playlists and charts. 
+Lastly, in this problem we need to split and explode the artists column again since there are multiple artists present in a single cell then make the splitted column into a dataframe in order to add the columns that contains the different playlists and charts, so we just need to explode the cells and groupby artists and add the total playlists and charts of each artist using the .sum() function. Sorting the values to descending order and display only 5, we now get the top 5 artists for playlists and charts. Then creating the bargraphs of each playlist and charts to display the top 5 artists using seaborn's bargraph.
 ```
 #Most frequently appearing artists in playlists or charts
 df1 = df
@@ -289,5 +289,12 @@ plt.figure(figsize=(7,7))
 sns.barplot(data=shazamch)
 ```
 *SUMMARY OF GRAPHS IN MOST FREQUENT ARTISTS IN DIFFERENT PLAYLISTS*
+![Screenshot 2024-11-09 174116](https://github.com/user-attachments/assets/2a07bd2c-641a-4c6b-8c1a-71452c618125)
+![Screenshot 2024-11-09 174131](https://github.com/user-attachments/assets/8d76480b-3aa1-43f0-860c-870f29c1d6ff)
+![Screenshot 2024-11-09 174105](https://github.com/user-attachments/assets/83d59b67-d8fc-4b3b-b01e-f46374b2369d)
 
 *SUMMARY OF GRAPHS IN MOST FREQUENT ARTISTS IN DIFFERENT CHARTS*
+![Screenshot 2024-11-09 174244](https://github.com/user-attachments/assets/5c662b01-fb12-424f-a9c5-ce79c9842c1a)
+![Screenshot 2024-11-09 174254](https://github.com/user-attachments/assets/ad01e827-f061-4144-86f2-b034a58dd0a4)
+![Screenshot 2024-11-09 174151](https://github.com/user-attachments/assets/0bb7a1a2-8507-4ad8-97ec-2104c481a99b)
+![Screenshot 2024-11-09 174233](https://github.com/user-attachments/assets/dfc0c08b-16cc-4c51-9cd8-f33bc7dc3602)
