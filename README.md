@@ -125,6 +125,7 @@ plt.figure(figsize=(17,7))
 sns.barplot(x='track_name', y='streams', data=top5tracks)
 plt.xlabel('Track Name')
 plt.ylabel('Total Streams')
+plt.title('Top 5 most streamed tracks')
 ```
 With the number one spot, we have Blinding Lights! as the most streamed track making it the most popular one, followed by Shape of You, Someone You Loved, Dance Monkey, and Sunflower - Spider-Man: Into the Spider-Verse.  
 *Additionaly, if you want to display the artists that owns these tracks, you can add the column name in this code toptracks.head(5)[['COLUMN NAME']]*  
@@ -143,7 +144,8 @@ dffreqartist = pd.DataFrame(freqartist)
 plt.figure(figsize=(17,7))
 sns.barplot(x='artist(s)_name', y='count', data=dffreqartist)
 plt.xlabel('Artist Name')
-plt.ylabel('Count')
+plt.ylabel('Total # of Tracks')
+plt.title('Top 5 frequent artists')
 ```
 Congrats to Bad Bunny for having the highest number of tracks garnering a total number of 40 tracks! followed by, Taylor Swift, The Weeknd, SZA, and Kendrick Lamar.  
 ![Screenshot 2024-11-09 053647](https://github.com/user-attachments/assets/2fd9c4ac-c17d-44aa-97bd-9116bddb3702)
