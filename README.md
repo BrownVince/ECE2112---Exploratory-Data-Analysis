@@ -224,20 +224,6 @@ sns.barplot(x='Platform', y='Total # of Tracks', data=ntracks)
 We can see that spotify domainates in the number of tracks present in their playlists. The second place belongs to deezer, and the third place belongs to apple.
 **INSERT PIC**
 
-* **Which platform favors the most popular tracks**  
-In this problem, it is the same as the previous one, but this finds which platform has the highest number of most popular tracks present in their playlist. Hence, we start by selecting the most popular tracks, whereas I cosidered the top 10 tracks.
-```
-top10 = toptracks.head(10)[['track_name', 'streams', 'in_spotify_playlists', 'in_apple_playlists', 'in_deezer_playlists']]
-
-poppform = pd.DataFrame({'Platform': ['Spotify', 'Apple', 'Deezer'],
-                       'Total # of Playlists': [top10['in_spotify_playlists'].sum(), top10['in_apple_playlists'].sum(), 
-                                                top10['in_deezer_playlists'].sum()]})
-print(poppform)
-sns.barplot(x='Platform', y='Total # of Playlists', data=poppform)
-```
-As usual, as a result, spotify favors the most popular tracks, deezer as second, and apple being third.
-**INSERT PIC**
-
 # Advanced Analysis
 * **Patterns among tracks with the same key and mode based on streams data**  
 Again, in this problem I used the .groupby() function by grouping the tracks according to their specific keys or mode and added the all the streams value in a specific group by using the .sum() function.
@@ -261,40 +247,47 @@ As a result, we get the key C# as the highest playing key, and mode Major as the
 
 
 * **Most frequently appearing artists in playlists or charts**  
-Lastly, in this problem we need to split and explode the artists column again since there are multiple artists present in a single cell then make the splitted column into a dataframe in order to add a column that contains the total number of playlists or charts for each artist, so we set the .sum(axis=1) in order to add total playlist or chart for each artist in a row, and not the sum of the entire column. Then after that, we need to explode the resulting data frame in order to separate artists into individual cells or rows. Then we need to group again the set based on artist name using the .groupby() function and add the total playlist or charts for each group (now known as a single artist name). Sorting the values to descending order and display only 5, we now get the top 5 artists for playlists and charts. 
+Lastly, in this problem we need to split and explode the artists column again since there are multiple artists present in a single cell then make the splitted column into a dataframe in order to add the columns that contains the different playlists and charts, so we just need to explode the cells and groupby artists and add the total playlists and charts of each artist using the .sum() function. Sorting the values to descending order and display only 5, we now get the top 5 artists for playlists and charts. 
 ```
-dfsnames = pd.DataFrame(splitnames, columns=['artist(s)_name'])
-dfsnames['total_playlists'] = df[['in_spotify_playlists', 'in_apple_playlists', 'in_deezer_playlists']].sum(axis=1)
-dfsnames['total_charts'] = df[['in_spotify_charts', 'in_apple_charts', 'in_deezer_charts', 'in_shazam_charts']].sum(axis=1)
+#Most frequently appearing artists in playlists or charts
+df1 = df
+df1['artist(s)_name'] = splitnames
+spotifypl = df1.explode('artist(s)_name').groupby('artist(s)_name')['in_spotify_playlists'].sum().sort_values(ascending=False).head(5)
+applepl = df1.explode('artist(s)_name').groupby('artist(s)_name')['in_apple_playlists'].sum().sort_values(ascending=False).head(5)
+deezerpl = df1.explode('artist(s)_name').groupby('artist(s)_name')['in_deezer_playlists'].sum().sort_values(ascending=False).head(5)
+spotifych = df1.explode('artist(s)_name').groupby('artist(s)_name')['in_spotify_charts'].sum().sort_values(ascending=False).head(5)
+applech = df1.explode('artist(s)_name').groupby('artist(s)_name')['in_apple_charts'].sum().sort_values(ascending=False).head(5)
+deezerch = df1.explode('artist(s)_name').groupby('artist(s)_name')['in_deezer_charts'].sum().sort_values(ascending=False).head(5)
+shazamch = df1.explode('artist(s)_name').groupby('artist(s)_name')['in_shazam_charts'].sum().sort_values(ascending=False).head(5)
 
-dfsnexploded = dfsnames.explode('artist(s)_name').reset_index(drop=True)
+#Most frequent artists based on number of spotify playlist
+plt.figure(figsize=(7,7))
+sns.barplot(data=spotifypl)
 
-plrank = dfsnexploded.groupby('artist(s)_name')['total_playlists'].sum()
-chrank = dfsnexploded.groupby('artist(s)_name')['total_charts'].sum()
+#Most frequent artists based on number of apple playlist
+plt.figure(figsize=(7,7))
+sns.barplot(data=applepl)
 
-psort = plrank.sort_values(ascending=False).head(5)
-csort = chrank.sort_values(ascending=False).head(5)
+#Most frequent artists based on number of deezer playlist
+plt.figure(figsize=(7,7))
+sns.barplot(data=deezerpl)
 
-dfplrank = pd.DataFrame(psort)
-dfchrank = pd.DataFrame(csort)
+#Most frequent artists based on number of spotify charts
+plt.figure(figsize=(7,7))
+sns.barplot(data=spotifych)
 
-#For the most frequent artist appeared in playlist
-plt.figure(figsize=(17,7))
-sns.barplot(x='artist(s)_name', y='total_playlists', data=dfplrank)
-plt.xlabel('Artist Name')
-plt.ylabel('Total Playlist')
-plt.title('Most frequently appearing artists in playlists')
+#Most frequent artists based on number of apple charts
+plt.figure(figsize=(7,7))
+sns.barplot(data=applech)
 
-#For the most frequent artist appeared in chart
-plt.figure(figsize=(17,7))
-sns.barplot(x='artist(s)_name', y='total_charts', data=dfchrank)
-plt.xlabel('Artist Name')
-plt.ylabel('Total Charts')
-plt.title('Most frequently appearing artists in charts')
+#Most frequent artists based on number of deezer charts
+plt.figure(figsize=(7,7))
+sns.barplot(data=deezerch)
+
+##Most frequent artists based on number of shazam charts
+plt.figure(figsize=(7,7))
+sns.barplot(data=shazamch)
 ```
-For the most frequent artist appeared in playlist, we have The Weeknd, followed by Eminem, Ed Sheeran, Taylor Swift, and Bad Bunny  
-For the most frequent artist appeared in chart, we have the number one spot taken again by The Weeknd, followed by, Bad Bunny, Taylor Swift, Peso Pluma, and David Guetta  
-Meaning that The Weeknd is the only one consistent in the rankings.  
-![Screenshot 2024-11-09 055529](https://github.com/user-attachments/assets/08f794c6-020f-4334-9f3e-daa5f7513ede)  
-![Screenshot 2024-11-09 055548](https://github.com/user-attachments/assets/5152ed64-54d6-4f35-af2a-3909f3544712)
+*SUMMARY OF GRAPHS IN MOST FREQUENT ARTISTS IN DIFFERENT PLAYLISTS*
 
+*SUMMARY OF GRAPHS IN MOST FREQUENT ARTISTS IN DIFFERENT CHARTS*
